@@ -4,7 +4,7 @@
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-        <title>Example Student's HCDE 439 Physical Computing Page!</title> 
+        <title>Maike Wells's HCDE 439 Physical Computing Page!</title>
 
         <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
 
@@ -12,13 +12,41 @@
     <body> 
 
         <div class="header">
-            <h1>Example Student's Assignment 1!</h1>
+            <h1>Maike's Assignment 1!</h1>
             <p>
-            <img src="red-panda.jpg" width=400></a>
+            <img src="giphy.gif" width=400></a>
             </p>
             <p>
-            Here is all the documentation for assignment 1!
+            <img src="a1pic.jpg" width=400></a>
             </p>
+            <p>
+            Here is my code:
+            </p>
+            <pre>
+            <code>
+            void setup() {
+              // initialize digital pin LED_BUILTIN as an output.
+              pinMode(8, OUTPUT); // initalize the red pin to 8
+              pinMode(9, OUTPUT); // initalize the green pin to 9
+              pinMode(10, OUTPUT);  // initalize the yellow pin to 10
+            }
+
+            void loop() {
+              digitalWrite(8, HIGH);   // turn the red LED on (HIGH is the voltage level)
+              delay(100);                       // wait for a millisecond
+              digitalWrite(8, LOW);    // turn the red LED off by making the voltage LOW
+              delay(100);             // wait for a second
+              digitalWrite(9, HIGH);  // turn the green LED on
+              delay(100);              // wait for a millisecond
+              digitalWrite(9, LOW);    // turn the green LED off
+              delay(100);               // wait for a millisecond
+              digitalWrite(10, HIGH);  // turn the yellow LED on
+              delay(100);               // wait for a millisecond
+              digitalWrite(10, LOW);  // turn the yellow LED off
+              delay(100);               // wait for a millisecond
+
+            </code>
+            </pre>
         </div>
         
     </body>
