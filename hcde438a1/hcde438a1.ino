@@ -1,4 +1,4 @@
-// the setup function runs once when you press reset or power the board
+
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(8, OUTPUT); // initalize the red pin to 8
@@ -6,7 +6,6 @@ void setup() {
   pinMode(10, OUTPUT);  // initalize the yellow pin to 10
 }
 
-// the loop function runs over and over again forever
 void loop() {
   digitalWrite(8, HIGH);   // turn the red LED on (HIGH is the voltage level)
   delay(100);                       // wait for a millisecond
