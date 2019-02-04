@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Maike's HCDE 439 Physical Computing Page!</title>
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Maike's Assignment 4!</h1>
+            <p>
+                This program uses a transistor to control load power separate from logic power. And it lights up an led strip!
+            </p>
+            <p>
+            <img src="IMG_2965.JPG" width=400></a>
+            </p>
+            <p>
+            <img src="" width=400></a>
+            </p>
+            <p>
+            </p>
+            <p>
+                The project uses analogWrite(), a high-load output device, and an input sensor.
+            </p>
+            <p>
+                Schematic:
+            </p>
+            <a>
+                <img src="maikea4s.jpg" width="400"</a>
+            </p>
+            <p>
+
+            </p>
+            <p>
+            Here is all the documentation for assignment 4!
+            </p>
+            <p>
+                Here is my code:
+            </p>
+            <pre>
+                <code>
+                    // these are constants
+                    int inputPin = 0; // Sensor Pin
+                    int ledPin = 9; // LED Pin
+
+                    void setup() { // setup code, runs once
+                    Serial.begin(9600); // serial communcation
+                    pinMode(ledPin, OUTPUT); // initializing led pin for output
+                    pinMode(inputPin, INPUT); // initializing sensor pin for input
+                    }
+
+                    void loop() {
+                    // main code here, runs repeatedly:
+                    int lightReading = analogRead(inputPin); // Reads photo. sensor
+                    lightReading = constrain(lightReading, 400, 800); // Checks that the values are within a normal range for mapping
+                    int LEDbright = map(lightReading, 400, 800, 0, 255); // Maps the light sensor values to output values
+                    Serial.print(lightReading); // Serial prints the brightness reading of the light.
+                    analogWrite(ledPin, LEDbright); // turns on the LED
+                    }
+                </code>
+            </pre>
+        </div>
+
+    </body>
+</html>
