@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Maike's HCDE 439 Physical Computing Page!</title>
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Maike's Assignment 5, Motors!</h1>
+            <p>
+                My program operates a DC motor using a joystick. When you push the joystick down, the motor spins the fan. When
+                you push the joystick up, the motor stops spinng.
+            </p>
+            <p>
+            <img src="a3pic1.jpg" width=400></a>
+            </p>
+            <p>
+            <img src="a5gif.gif" width=400></a>
+            </p>
+            <p>
+            </p>
+            <p>
+                Schematic:
+            </p>
+            <a>
+                <img src="a5sch.jpg" width="400"</a>
+            </p>
+            <p>
+                I used a DC motor, which requires a flashback diode and a resistor. I used a 10k resistor.
+            </p>
+            <p>
+            Here is all the documentation for assignment 3!
+            </p>
+            <p>
+                Here is my code:
+            </p>
+            <pre>
+                <code>
+                    // constant variables
+                    int yPin = A1; // initalize pin
+                    int yVal = 0; // reads current y value
+                    int motor = 9; // motor connection pin
+
+                    // initalize
+                    void setup() {
+                      pinMode(motor, OUTPUT);  // sets motor to output
+                      Serial.begin(9600); // initalizes serial to 9600
+                    }
+
+                    void loop() {
+                      yVal = analogRead(yPin); // value from pin
+                      yVal = yVal - 255; // new y position
+                      int motorVal = map(yVal, 0, 1023, 100, 255);  // motor values
+                      analogWrite(motor, motorVal);  // speed of motor depending on joystick position
+
+                      delay(1000); // one second delay
+                    }
+                </code>
+            </pre>
+        </div>
+
+    </body>
+</html>
+
