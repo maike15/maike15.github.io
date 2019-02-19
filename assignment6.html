@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Maike's HCDE 439 Physical Computing Page!</title>
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Maike's Assignment 6, Datalogging!</h1>
+            <p>
+                This program creates an interactive webpage with p5.js that interacts with data from the arduino via serial.
+                When the user spins the potentiometer, the webpage displays vertical lines that move higher or lower depending
+                on the reading.
+
+            </p>
+            <p>
+                Here is a picture of the circut:
+            </p>
+            <p>
+            <img src="a6circut.jpg" width=400></a>
+            </p>
+            <p>
+                Below is a gif of the program. As I turn the potentiometer to the right, the pink lines on the webpage grow, and as I
+                turn it to the left, the lines shrink.
+            </p>
+            <p>
+            <img src="a6gif.gif" width=400></a>
+            </p>
+            <p>
+                Below is a picture of the p5 communication code (the btm half). Most noteworthy is the draw function, which
+                calls the graphData function and results in the visual representation of the potentiometer reading.
+            </p>
+            <p>
+                <img src="a6code.png" width=400></a>
+            </p>
+            <p>
+            </p>
+            <p>
+                Schematic:
+            </p>
+            <a>
+                <img src="a6sch.png" width="400"</a>
+            </p>
+            <p>
+
+            </p>
+            <p>
+            </p>
+            <p>
+                Here is my code:
+            </p>
+            <pre>
+                <code>
+                void setup() {
+                    Serial.begin(9600); //begin serial communication
+                }
+
+                void loop() {
+                    int pot = analogRead(A0); // reads the value from the potentiometer
+                    Serial.println(pot); // prints the value to serial
+                    delay(50); // pause
+                }
+                </code>
+            </pre>
+        </div>
+
+    </body>
 </html>
