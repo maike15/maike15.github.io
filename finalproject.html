@@ -14,16 +14,626 @@
         <div class="header">
             <h1>Maike's Final Project!</h1>
             <p>
-                Wind Activated Twinkle Lights
+                Water Intake Tracker
             </p>
             <p>
-                Rather than having to get out of bed or stretch super far to turn off your pretty twinkle lights, my project
-                will turn on/off the lights when you blow on the sensor!
-                Question: is this feasible? Does such a sensor exist?
+                CONCEPT:
+                There is currently a health craze consuming the nation. However strange, there is an opportunity to
+                design applications and products that help these users achieve their goals. While there is significant
+                debate around what a "healthy" life/diet/routine actually looks like, something that almost all health
+                professionals agree on is that water is VITAL.
+                I created a water bottle attachment that prompts the user to drink, reinforces positive behavior with
+                prompts, and tracks how many times they drink throughout the day.
             </p>
             <p>
-            <img src="finalprojectsketch.jpg" width=400></a>
+                TECHNICAL DETAILS:
+                Unfortunately, I am not a genius and this is all just a ~prototype~. A user inputs values via Serial (input aspect),
+                which then appear on the 4-Digit 7-Segment Display (output aspect). The user can input, through
+                the Serial display, values from 0-9 by simply pressing those buttons on their keyboard.
+                In order to display more complicated digits/words, the user must type a key-character. This is because the
+                code only recognizes chars, not strings or integers.
             </p>
+            <p>
+                The key is as follows:
+            </p>
+            <p>
+                q: 10
+            </p>
+            <p>
+                n: nice
+            </p>
+            <p>
+                h: hello:
+            </p>
+            <p>
+                b: bye
+            </p>
+            <p>
+                s: sip
+            </p>
+            <p>
+                For each Serial input char, there is an if/else statement, that if it tests true, turns on the corresponding
+                digits and segments. The code is super long, so it is at the bottom of this page.
+            </p>
+            <p>
+                PICTURES AND VIDEO:
+            </p>
+            <p>
+            <img src="IMG_3103.jpg" width=400></a>
+            </p>
+            <p>
+            <img src="IMG_3109.jpg" width=400></a>
+            </p>
+            <p>
+            <img src="IMG_3110.jpg" width=400></a>
+            </p>
+            <p>
+            <img src="IMG_3111.jpg" width=400></a>
+            </p>
+            <p>
+            <img src="finalgif.png" width=400></a>
+            </p>
+            <p>
+            </p>
+            <p>
+                SCHEMATIC:
+            </p>
+             <p>
+            <img src="finalsch.jpg" width=400></a>
+            </p>
+            <p>
+                Display pin diagram and reference table:
+            </p>
+            <p>
+            <img src="finalplug.jpg" width=400></a>
+            </p>
+            <p>
+                ARDUINO CODE:
+            </p>
+            <pre>
+            <code>
+// Pin 2-8 is connected to the 7 segments of the display.
+
+int pinA = 2;
+int pinB = 3;
+int pinC = 4;
+int pinD = 5;
+int pinE = 6;
+int pinF = 7;
+int pinG = 8;
+int D1 = 9;
+int D2 = 10;
+int D3 = 11;
+int D4 = 12;
+char currentChar = 'j';
+
+//
+void setup() {
+  // initialize the digital pins as outputs.
+  pinMode(pinA, OUTPUT);
+  pinMode(pinB, OUTPUT);
+  pinMode(pinC, OUTPUT);
+  pinMode(pinD, OUTPUT);
+  pinMode(pinE, OUTPUT);
+  pinMode(pinF, OUTPUT);
+  pinMode(pinG, OUTPUT);
+  pinMode(D1, OUTPUT);
+  pinMode(D2, OUTPUT);
+  pinMode(D3, OUTPUT);
+  pinMode(D4, OUTPUT);
+
+  Serial.begin(9600); // begins serial input
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  if (Serial.available() > 0) { // if a serial input is given
+    char inChar = Serial.read();  // reads the serial input and saves it as inChar
+
+    // if the given input is 1, send 1 to display
+    if (inChar == '1') {
+      currentChar = '1';
+      Serial.println("1");
+      digitalWrite(D1, HIGH); // first digit is off
+      digitalWrite(D2, HIGH); // second digit is off
+      digitalWrite(D3, HIGH); // third digit is off
+      digitalWrite(D4, LOW);  // fourth digit is on
+      //0
+
+      digitalWrite(pinA, LOW); // segment A is off
+      digitalWrite(pinB, HIGH);   // segment B is on
+      digitalWrite(pinC, HIGH);   // segment C is on
+      digitalWrite(pinD, LOW);   // segment D is off
+      digitalWrite(pinE, LOW);   // segment E is off
+      digitalWrite(pinF, LOW);   // segment F is off
+      digitalWrite(pinG, LOW);   // segmnet G is off
+      delay(1);               // wait for a second
+
+    // if the given input is 2, send 2 to display
+    } else if (inChar == '2') {
+      currentChar = '2';
+      Serial.println("2");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, LOW);
+      digitalWrite(pinD, HIGH);
+      digitalWrite(pinE, HIGH);
+      digitalWrite(pinF, LOW);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 3, send 3 to display
+    } else if (inChar == '3') {
+      Serial.println("3");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, HIGH);
+      digitalWrite(pinE, LOW);
+      digitalWrite(pinF, LOW);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 4, send 4 to display
+    } else if (inChar == '4') {
+      Serial.println("4");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, LOW);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, LOW);
+      digitalWrite(pinE, LOW);
+      digitalWrite(pinF, HIGH);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 5, send 5 to display
+    } else if (inChar == '5') {
+      Serial.println("test");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, LOW);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, HIGH);
+      digitalWrite(pinE, LOW);
+      digitalWrite(pinF, HIGH);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 6, send 6 to display
+    } else if (inChar == '6') {
+      Serial.println("test");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, LOW);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, HIGH);
+      digitalWrite(pinE, HIGH);
+      digitalWrite(pinF, HIGH);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 7, send 7 to display
+    } else if (inChar == '7') {
+      Serial.println("test");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, LOW);
+      digitalWrite(pinE, LOW);
+      digitalWrite(pinF, LOW);
+      digitalWrite(pinG, LOW);
+      delay(1);               // wait for a second
+
+    // if the given input is 8, send 8 to display
+    } else if (inChar == '8') {
+      Serial.println("test");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, HIGH);
+      digitalWrite(pinE, HIGH);
+      digitalWrite(pinF, HIGH);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 9, send 9 to display
+    } else if (inChar == '9') { //9
+      Serial.println("test");
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, LOW);
+      digitalWrite(pinE, LOW);
+      digitalWrite(pinF, HIGH);
+      digitalWrite(pinG, HIGH);
+      delay(1);               // wait for a second
+
+    // if the given input is 0, send 0 to display
+    } else if (inChar == '0') { //0
+      digitalWrite(D1, HIGH);
+      digitalWrite(D2, HIGH);
+      digitalWrite(D3, HIGH);
+      digitalWrite(D4, LOW);
+      //0
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, HIGH);
+      digitalWrite(pinC, HIGH);
+      digitalWrite(pinD, HIGH);
+      digitalWrite(pinE, HIGH);
+      digitalWrite(pinF, HIGH);
+      digitalWrite(pinG, LOW);
+      delay(1000);
+
+    // if the given input is q, send 10 to display
+    // via process of multiplexing
+    } else if (inChar == 'q') { //10
+      for (int i = 0; i < 100; i++) {
+        //1
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, LOW);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, LOW);
+        digitalWrite(pinG, LOW);
+        delay(10);
+
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, LOW);
+        //0
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, LOW);
+        delay(10);
+      }
+
+    // if the given input is n, send NICE to display
+    // via process of multiplexing
+    } else if (inChar == 'n') { //NICE
+      currentChar = 'n';
+      for (int i = 0; i < 700; i++) {
+        //n
+        digitalWrite(D1, LOW);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, LOW);
+        delay(1);
+
+        //I
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, LOW);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, LOW);
+        digitalWrite(pinG, LOW);
+        delay(1);
+
+        // C
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, LOW);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, LOW);
+        delay(1);
+
+        //e
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, LOW);
+        //0
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        //off
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, LOW);
+        digitalWrite(pinG, LOW);
+        delay(1);
+      }
+
+    // if the given input is h, send HELLO to display
+    // via process of multiplexing
+    } else if (inChar == 'h') { //HEllO
+      currentChar = 'n';
+      for (int i = 0; i < 700; i++) {
+        //H
+        digitalWrite(D1, LOW);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        //e
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, LOW);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        // ll
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, LOW);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, LOW);
+        delay(1);
+
+        //O
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, LOW);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, LOW);
+        delay(1);
+
+        //off
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, LOW);
+        digitalWrite(pinG, LOW);
+        delay(1);
+      }
+
+    // if the given input is s, send SIP to display
+    // via process of multiplexing
+    } else if (inChar == 's') { //SIP
+      currentChar = 'n';
+      for (int i = 0; i < 700; i++) {
+        //S
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, LOW);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        // I
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, LOW);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, LOW);
+        delay(1);
+
+        //P
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, LOW);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        //off
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, LOW);
+        digitalWrite(pinG, LOW);
+        delay(1);
+      }
+
+    // if the given input is b, send BYE to display
+    // via process of multiplexing
+    } else if (inChar == 'b') { //BYE
+      currentChar = 'b';
+      for (int i = 0; i < 700; i++) {
+        //b
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, LOW);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        // Y
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, LOW);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, HIGH);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        //e
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, LOW);
+
+        digitalWrite(pinA, HIGH);
+        digitalWrite(pinB, HIGH);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, HIGH);
+        digitalWrite(pinE, HIGH);
+        digitalWrite(pinF, HIGH);
+        digitalWrite(pinG, HIGH);
+        delay(1);
+
+        //off
+        digitalWrite(D1, HIGH);
+        digitalWrite(D2, HIGH);
+        digitalWrite(D3, HIGH);
+        digitalWrite(D4, HIGH);
+
+        digitalWrite(pinA, LOW);
+        digitalWrite(pinB, LOW);
+        digitalWrite(pinC, LOW);
+        digitalWrite(pinD, LOW);
+        digitalWrite(pinE, LOW);
+        digitalWrite(pinF, LOW);
+        digitalWrite(pinG, LOW);
+        delay(1);
+      }
+    }
+  }
+}
+            </code>
+            </pre>
         </div>
 
     </body>
